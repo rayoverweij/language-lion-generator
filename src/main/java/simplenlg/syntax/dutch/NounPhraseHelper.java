@@ -319,8 +319,6 @@ public class NounPhraseHelper extends AbstractNounPhraseHelper
 			Object function = phrase.getFeature(InternalFeature.DISCOURSE_FUNCTION);
 			boolean passive = parent.getFeatureAsBoolean(Feature.PASSIVE);
 			boolean negated = parent.getFeatureAsBoolean(Feature.NEGATED);
-			boolean ne_only_negation = parent.checkIfNeOnlyNegation();
-			negated = negated || ne_only_negation;
 			if (!passive && negated && function == DiscourseFunction.OBJECT) {
 				returnValue = true;
 			}

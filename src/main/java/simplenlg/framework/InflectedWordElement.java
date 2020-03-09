@@ -144,9 +144,6 @@ public class InflectedWordElement extends NLGElement {
 			case ENGLISH:
 				ruleSet = new simplenlg.morphology.english.NonStaticMorphologyRules();
 				break;
-			case FRENCH:
-				ruleSet = new simplenlg.morphology.french.MorphologyRules();
-				break;
 			case DUTCH:
 				ruleSet = new simplenlg.morphology.dutch.MorphologyRules();
 				break;

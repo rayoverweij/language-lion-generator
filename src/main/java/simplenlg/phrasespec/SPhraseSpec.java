@@ -29,7 +29,6 @@ import simplenlg.features.Feature;
 import simplenlg.features.InternalFeature;
 import simplenlg.features.LexicalFeature;
 import simplenlg.features.dutch.DutchFeature;
-import simplenlg.features.french.FrenchFeature;
 import simplenlg.framework.CoordinatedPhraseElement;
 import simplenlg.framework.LexicalCategory;
 import simplenlg.framework.NLGElement;
@@ -100,7 +99,7 @@ public class SPhraseSpec extends PhraseElement {
 			Feature.PROGRESSIVE, InternalFeature.REALISE_AUXILIARY,
 			Feature.FORM, Feature.INTERROGATIVE_TYPE,
 			// vaudrypl added gender for participle agreement in French
-			LexicalFeature.GENDER, FrenchFeature.NEGATION_AUXILIARY);
+			LexicalFeature.GENDER);
 
 	/**
 	 * create an empty clause
@@ -448,9 +447,7 @@ public class SPhraseSpec extends PhraseElement {
 	@Override
 	public boolean hasRelativePhrase(DiscourseFunction function) {
 		
-		NLGElement relative = getFeatureAsElement(FrenchFeature.RELATIVE_PHRASE);
-
-		if (relative == null) relative = getFeatureAsElement(DutchFeature.RELATIVE_PHRASE);
+		NLGElement relative = getFeatureAsElement(DutchFeature.RELATIVE_PHRASE);
 		
 		if (relative != null) {
 			Object relativeFunction =

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<lexicon>
+    <sem>
+        <id>S0030000</id>
+        <name>to_be</name>
+        <dutch>
+            <base>zijn</base>
+            <category>verb</category>
+            <present1s>ben</present1s>
+            <present2s>bent</present2s>
+            <present3s>is</present3s>
+            <present1p>zijn</present1p>
+            <present2p>zijn</present2p>
+            <present3p>zijn</present3p>
+            <past1s>was</past1s>
+            <past2s>was</past2s>
+            <past3s>was</past3s>
+            <past1p>waren</past1p>
+            <past2p>waren</past2p>
+            <past3p>waren</past3p>
+            <imperative2s>wees</imperative2s>
+            <imperative2p>weest</imperative2p>
+            <future_radical>zijn</future_radical>
+            <pastParticiple>geweest</pastParticiple>
+            <presentParticiple>zijnde</presentParticiple>
+            <pastSubjunctive2s>ware</pastSubjunctive2s>
+            <copular/>
+            <intransitive/>
+            <auxiliary_zijn/>
+        </dutch>
+        <english>
+            <base>be</base>
+            <category>verb</category>
+            <pastParticiple>been</pastParticiple>
+            <presentParticiple>being</presentParticiple>
+            <transitive/>
+        </english>
+    </sem>
+</lexicon>

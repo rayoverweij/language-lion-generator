@@ -18,23 +18,21 @@
  */
 package simplenlg.syntax.dutch;
 
-import simplenlg.features.french.FrenchInternalFeature;
 import simplenlg.framework.NLGElement;
 import simplenlg.framework.PhraseElement;
 
 /**
  * This class contains methods to help the syntaxical realisation
- * of phrases for French.
+ * of phrases for Dutch.
  * It is the same as the generic phrase helper.
  * 
- * @author vaudrypl
+ * @author vaudrypl & rayoverweij
  */
 public class PhraseHelper extends simplenlg.syntax.GenericPhraseHelper
 {
 
 	/**
-	 * The main method for realising phrases. In French, checks that the
-	 * phrase is not relativised before realising it.
+	 * The main method for realising phrases.
 	 * 
 	 * @param phrase
 	 *            the <code>PhraseElement</code> to be realised.
@@ -45,11 +43,7 @@ public class PhraseHelper extends simplenlg.syntax.GenericPhraseHelper
 		NLGElement realisedElement = null;
 
 		if (phrase != null) {
-			if (!phrase.getFeatureAsBoolean(FrenchInternalFeature.RELATIVISED)) {
-				realisedElement = super.realise(phrase);
-			} else {
-				phrase.removeFeature(FrenchInternalFeature.RELATIVISED);
-			}
+			realisedElement = super.realise(phrase);
 		}
 		return realisedElement;
 	}

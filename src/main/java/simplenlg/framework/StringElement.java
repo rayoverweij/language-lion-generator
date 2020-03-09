@@ -61,7 +61,7 @@ public class StringElement extends NLGElement {
 	/**
 	 * Constructs a new string element from an InflectedWordElement.
 	 * 
-	 * @param value
+	 * @param word
 	 *            the text for this string element.
 	 * @author vaudrypl
 	 */
@@ -186,9 +186,6 @@ public class StringElement extends NLGElement {
 			switch (language) {
 			case ENGLISH:
 				ruleSet = new simplenlg.morphophonology.english.MorphophonologyRules();
-				break;
-			case FRENCH:
-				ruleSet = new simplenlg.morphophonology.french.MorphophonologyRules();
 				break;
 			case DUTCH:
 				ruleSet = new simplenlg.morphophonology.dutch.MorphophonologyRules();

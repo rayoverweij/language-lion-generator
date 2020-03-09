@@ -182,10 +182,6 @@ public class CoordinatedPhraseElement extends NLGElement {
 				coordinatedPhraseHelper =
 					new simplenlg.syntax.english.nonstatic.CoordinatedPhraseHelper();
 				break;
-			case FRENCH:
-				coordinatedPhraseHelper =
-					new simplenlg.syntax.french.CoordinatedPhraseHelper();
-				break;
 			case DUTCH:
 				coordinatedPhraseHelper =
 					new simplenlg.syntax.dutch.CoordinatedPhraseHelper();
@@ -654,25 +650,5 @@ public class CoordinatedPhraseElement extends NLGElement {
 		wordCount += countWords(getPostModifiers());
 		
 		return wordCount;
-	}
-
-	/**
-	 * Checks if this element must provoke a negation, but with only
-	 * the adverb "ne", in French.
-	 * 
-	 * @return true if the element provokes a negation with only "ne"
-	 * 
-	 * @author vaudrypl
-	 */
-	@Override
-	public boolean checkIfNeOnlyNegation() {
-		boolean returnValue = false;
-		
-		WordElement conjunction = getConjunction();
-		if (conjunction != null) {
-			returnValue = conjunction.checkIfNeOnlyNegation();
-		}
-		
-		return returnValue;
 	}
 }

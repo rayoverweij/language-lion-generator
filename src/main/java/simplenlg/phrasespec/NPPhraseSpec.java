@@ -277,29 +277,4 @@ public class NPPhraseSpec extends PhraseElement {
 		}
 		addPreModifier(newElement);
 	}
-
-	/**
-	 * Checks if this element must provoke a negation, but with only
-	 * the adverb "ne", in French.
-	 * 
-	 * @return true if the element provokes a negation with only "ne"
-	 * 
-	 * @author vaudrypl
-	 */
-	@Override
-	public boolean checkIfNeOnlyNegation() {
-		boolean specifierNeNegation = false;
-		NLGElement specifier = getSpecifier();
-		if (specifier != null) {
-			specifierNeNegation = specifier.checkIfNeOnlyNegation();
-		}
-		
-		boolean headNeNegation = false;
-		NLGElement head = getHead();
-		if (head != null) {
-			headNeNegation = head.checkIfNeOnlyNegation();
-		}
-		
-		return specifierNeNegation || headNeNegation;
-	}
 }

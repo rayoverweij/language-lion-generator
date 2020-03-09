@@ -22,9 +22,7 @@ import simplenlg.features.*;
 import simplenlg.features.dutch.DutchFeature;
 import simplenlg.features.dutch.DutchInternalFeature;
 import simplenlg.features.dutch.DutchLexicalFeature;
-import simplenlg.features.french.FrenchInternalFeature;
-import simplenlg.features.french.FrenchLexicalFeature;
-import simplenlg.features.french.PronounType;
+import simplenlg.features.dutch.PronounType;
 import simplenlg.framework.*;
 import simplenlg.lexicon.Lexicon;
 import simplenlg.phrasespec.NPPhraseSpec;
@@ -37,7 +35,7 @@ import java.util.Stack;
 
 /**
  * This class contains static methods to help the syntax processor realise verb
- * phrases for French.
+ * phrases for Dutch.
  * 
  * Reference :
  * 
@@ -45,7 +43,7 @@ import java.util.Stack;
  * 12e édition refondue par André Goosse, 8e tirage, Éditions Duculot,
  * Louvain-la-Neuve, Belgique.
  * 
- * @author vaudrypl, rfdj
+ * @author vaudrypl, rfdj, rayoverweij
  */
 public class VerbPhraseHelper extends simplenlg.syntax.english.nonstatic.VerbPhraseHelper {
 
@@ -268,7 +266,7 @@ public class VerbPhraseHelper extends simplenlg.syntax.english.nonstatic.VerbPhr
 	@Override
 	public boolean isCopular(NLGElement element) {
 		if (element != null) {
-			return element.getFeatureAsBoolean(FrenchLexicalFeature.COPULAR);
+			return element.getFeatureAsBoolean(DutchLexicalFeature.COPULAR);
 		} else return true;
 	}
 
@@ -322,14 +320,12 @@ public class VerbPhraseHelper extends simplenlg.syntax.english.nonstatic.VerbPhr
 			if (!mainVerbSeen) {
 				mainVerbRealisation.push(word);
 //				if (!word.equals("pas") &&
-				if (!word.isA(LexicalCategory.ADVERB) &&
-						!word.getFeatureAsBoolean(FrenchInternalFeature.CLITIC)) {
+				if (!word.isA(LexicalCategory.ADVERB)) {
 					mainVerbSeen = true;
 				}
 			} else if (!cliticsSeen) {
 //				if (!word.equals("ne") &&
-				if (!"ne".equals(word.getFeatureAsString(LexicalFeature.BASE_FORM)) &&
-						!word.getFeatureAsBoolean(FrenchInternalFeature.CLITIC)) {
+				if (!"ne".equals(word.getFeatureAsString(LexicalFeature.BASE_FORM))) {
 					cliticsSeen = true;
 					auxiliaryRealisation.push(word);
 				} else {
@@ -397,7 +393,6 @@ public class VerbPhraseHelper extends simplenlg.syntax.english.nonstatic.VerbPhr
 		boolean cliticRising = false;
 		if (modal != null) {
 			modalWord = phrase.getLexicon().lookupWord(modal, LexicalCategory.VERB);
-			cliticRising = modalWord.getFeatureAsBoolean(FrenchLexicalFeature.CLITIC_RISING);
 		}
 
 		if (te_infinitive) {
@@ -587,11 +582,10 @@ public class VerbPhraseHelper extends simplenlg.syntax.english.nonstatic.VerbPhr
 					}
 					
 					if (head != null) {
-						type = head.getFeature(FrenchLexicalFeature.PRONOUN_TYPE);
+						type = head.getFeature(DutchLexicalFeature.PRONOUN_TYPE);
 					}
 					
 					if (type != null) {
-						complement.setFeature(FrenchInternalFeature.CLITIC, false);
 						if (type == PronounType.SPECIAL_PERSONAL) {
 							String baseForm = ((WordElement)head).getBaseForm();
 							if (baseForm.equals("en")) {
@@ -617,17 +611,14 @@ public class VerbPhraseHelper extends simplenlg.syntax.english.nonstatic.VerbPhr
 		// (indirect object) (direct object) y en
 		
 		if (pronounEn != null) {
-			pronounEn.setFeature(FrenchInternalFeature.CLITIC, true);
 			vgComponents.push(pronounEn);
 		}
 		
 		if (pronounY != null) {
-			pronounY.setFeature(FrenchInternalFeature.CLITIC, true);
 			vgComponents.push(pronounY);
 		}
 		
 		if (directObject != null) {
-			directObject.setFeature(FrenchInternalFeature.CLITIC, true);
 			vgComponents.push(directObject);
 		}
 		
@@ -637,8 +628,6 @@ public class VerbPhraseHelper extends simplenlg.syntax.english.nonstatic.VerbPhr
 				((directObject.getFeature(Feature.PERSON) == Person.THIRD
 						|| directObject.getFeature(Feature.PERSON) == null)
 					&& !directObject.getFeatureAsBoolean(LexicalFeature.REFLEXIVE) )) ) {
-			
-			indirectObject.setFeature(FrenchInternalFeature.CLITIC, true);
 
 			Object person = indirectObject.getFeature(Feature.PERSON);
 			boolean luiLeurPronoun = (person == null || person == Person.THIRD);
@@ -1162,7 +1151,7 @@ public class VerbPhraseHelper extends simplenlg.syntax.english.nonstatic.VerbPhr
 
 		for (NLGElement complement : phrase
 				.getFeatureAsElementList(InternalFeature.COMPLEMENTS)) {
-			if (!complement.getFeatureAsBoolean(FrenchInternalFeature.CLITIC)) {
+			if (!complement.getFeatureAsBoolean(DutchInternalFeature.CLITIC)) {
 				
 				discourseValue = complement.getFeature(InternalFeature.DISCOURSE_FUNCTION);
 

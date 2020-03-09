@@ -31,7 +31,6 @@ import simplenlg.features.InterrogativeType;
 import simplenlg.features.LexicalFeature;
 import simplenlg.features.NumberAgreement;
 import simplenlg.features.Person;
-import simplenlg.features.french.FrenchFeature;
 import simplenlg.framework.CoordinatedPhraseElement;
 import simplenlg.framework.LexicalCategory;
 import simplenlg.framework.ListElement;
@@ -82,8 +81,7 @@ public abstract class AbstractClauseHelper {
 			addComplementiser(phrase, realisedElement);
 			addCuePhrase(phrase, realisedElement);
 
-			if (phrase.hasFeature(Feature.INTERROGATIVE_TYPE)
-					|| phrase.hasFeature(FrenchFeature.RELATIVE_PHRASE)) {
+			if (phrase.hasFeature(Feature.INTERROGATIVE_TYPE)) {
 				splitVerb = realiseInterrogative(phrase,
 						realisedElement, phraseFactory, verbElement);
 			} else {
@@ -146,8 +144,7 @@ public abstract class AbstractClauseHelper {
 	protected void addInterrogativeFrontModifiers(PhraseElement phrase,
 			ListElement realisedElement) {
 		NLGElement currentElement = null;
-		if (phrase.hasFeature(Feature.INTERROGATIVE_TYPE)
-				|| phrase.hasFeature(FrenchFeature.RELATIVE_PHRASE)) {
+		if (phrase.hasFeature(Feature.INTERROGATIVE_TYPE)) {
 			for (NLGElement subject : phrase
 					.getFeatureAsElementList(InternalFeature.FRONT_MODIFIERS)) {
 				currentElement = subject.realiseSyntax();

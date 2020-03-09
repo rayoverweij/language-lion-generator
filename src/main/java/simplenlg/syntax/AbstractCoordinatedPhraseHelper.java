@@ -25,7 +25,6 @@ import simplenlg.features.DiscourseFunction;
 import simplenlg.features.Feature;
 import simplenlg.features.InternalFeature;
 import simplenlg.features.LexicalFeature;
-import simplenlg.features.french.FrenchLexicalFeature;
 import simplenlg.framework.CoordinatedPhraseElement;
 import simplenlg.framework.ElementCategory;
 import simplenlg.framework.InflectedWordElement;
@@ -105,15 +104,6 @@ public abstract class AbstractCoordinatedPhraseHelper {
 					}
 
 					// arguments changed and test added by vaudrypl
-					if (index != 0 ||
-							conjunction.getFeatureAsBoolean(FrenchLexicalFeature.REPEATED_CONJUNCTION)) {
-						conjunctionElement = new InflectedWordElement(conjunction);
-						
-						conjunctionElement.setFeature(
-								InternalFeature.DISCOURSE_FUNCTION,
-								DiscourseFunction.CONJUNCTION);
-						coordinated.addCoordinate(conjunctionElement);
-					}
 					coordinated.addCoordinate(child.realiseSyntax());
 				}
 				realisedElement.addComponent(coordinated);

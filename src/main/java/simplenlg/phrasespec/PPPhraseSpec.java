@@ -137,24 +137,4 @@ public class PPPhraseSpec extends PhraseElement {
 				return complement;
 		return null;
 	}
-
-	/**
-	 * Checks if this element must provoke a negation, but with only
-	 * the adverb "ne", in French.
-	 * 
-	 * @return true if the element provokes a negation with only "ne"
-	 * 
-	 * @author vaudrypl
-	 */
-	@Override
-	public boolean checkIfNeOnlyNegation() {
-		boolean returnValue = false;
-		
-		NLGElement object = getObject();
-		if (object != null) {
-			returnValue = object.checkIfNeOnlyNegation();
-		}
-		
-		return returnValue;
-	}
 }

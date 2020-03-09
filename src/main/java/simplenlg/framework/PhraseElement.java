@@ -27,7 +27,6 @@ import simplenlg.features.ClauseStatus;
 import simplenlg.features.DiscourseFunction;
 import simplenlg.features.Feature;
 import simplenlg.features.InternalFeature;
-import simplenlg.features.french.FrenchFeature;
 import simplenlg.phrasespec.*;
 import simplenlg.syntax.*;
 
@@ -96,9 +95,6 @@ public class PhraseElement extends NLGElement {
 			case ENGLISH:
 				clauseHelper = new simplenlg.syntax.english.nonstatic.ClauseHelper();
 				break;
-			case FRENCH:
-				clauseHelper = new simplenlg.syntax.french.ClauseHelper();
-				break;
 			case DUTCH:
 				clauseHelper = new simplenlg.syntax.dutch.ClauseHelper();
 				break;
@@ -138,10 +134,6 @@ public class PhraseElement extends NLGElement {
 			case ENGLISH:
 				nounPhraseHelper =
 					new simplenlg.syntax.english.nonstatic.NounPhraseHelper();
-				break;
-			case FRENCH:
-				nounPhraseHelper =
-					new simplenlg.syntax.french.NounPhraseHelper();
 				break;
 			case DUTCH:
 				nounPhraseHelper =
@@ -184,10 +176,6 @@ public class PhraseElement extends NLGElement {
 				phraseHelper =
 					new simplenlg.syntax.english.nonstatic.PhraseHelper();
 				break;
-			case FRENCH:
-				phraseHelper =
-					new simplenlg.syntax.french.PhraseHelper();
-				break;
 			case DUTCH:
 				phraseHelper =
 					new simplenlg.syntax.dutch.PhraseHelper();
@@ -228,10 +216,6 @@ public class PhraseElement extends NLGElement {
 			case ENGLISH:
 				verbPhraseHelper =
 					new simplenlg.syntax.english.nonstatic.VerbPhraseHelper();
-				break;
-			case FRENCH:
-				verbPhraseHelper =
-					new simplenlg.syntax.french.VerbPhraseHelper();
 				break;
 			case DUTCH:
 				verbPhraseHelper =

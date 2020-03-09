@@ -32,7 +32,6 @@ import simplenlg.features.Feature;
 import simplenlg.features.NumberAgreement;
 import simplenlg.features.Tense;
 import simplenlg.features.dutch.DutchLexicalFeature;
-import simplenlg.features.french.FrenchLexicalFeature;
 import simplenlg.lexicon.Lexicon;
 import simplenlg.orthography.OrthographyHelperInterface;
 
@@ -1069,9 +1068,6 @@ public abstract class NLGElement {
 			case ENGLISH:
 				orthographyHelper = new simplenlg.orthography.english.OrthographyHelper();
 				break;
-			case FRENCH:
-				orthographyHelper = new simplenlg.orthography.french.OrthographyHelper();
-				break;
 			case DUTCH:
 				orthographyHelper = new simplenlg.orthography.dutch.OrthographyHelper();
 				break;
@@ -1121,18 +1117,6 @@ public abstract class NLGElement {
 		return wordCount;
 	}
 
-	/**
-	 * Checks if this element must provoke a negation, but with only
-	 * the adverb "ne", in French. See overridden versions in subclasses.
-	 * 
-	 * @return true if the element provokes a negation with only "ne"
-	 * 
-	 * @author vaudrypl
-	 */
-	public boolean checkIfNeOnlyNegation() {
-		return getFeatureAsBoolean(FrenchLexicalFeature.NE_ONLY_NEGATION);
-	}
-	
 	/**
 	 * Overridden in SPhraseSpec. Always returns false for other NLGElement. 
 	 * 

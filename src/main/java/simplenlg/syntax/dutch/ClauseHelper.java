@@ -21,9 +21,6 @@ package simplenlg.syntax.dutch;
 import gov.nih.nlm.nls.lvg.Util.Str;
 import simplenlg.features.*;
 import simplenlg.features.dutch.DutchFeature;
-import simplenlg.features.french.FrenchFeature;
-import simplenlg.features.french.FrenchInternalFeature;
-import simplenlg.features.french.FrenchLexicalFeature;
 import simplenlg.framework.*;
 import simplenlg.phrasespec.NPPhraseSpec;
 import simplenlg.phrasespec.PPPhraseSpec;
@@ -132,10 +129,6 @@ public class ClauseHelper extends simplenlg.syntax.english.nonstatic.ClauseHelpe
 				} else if (person == Person.THIRD && currentPerson == Person.SECOND) {
 					person = Person.SECOND;
 				}
-
-				if (!noOnlyNegation) {
-					noOnlyNegation = currentElement.checkIfNeOnlyNegation();
-				}
 			}
 		}
 		// If there is at least one feminine subject and nothing else, the gender
@@ -148,31 +141,6 @@ public class ClauseHelper extends simplenlg.syntax.english.nonstatic.ClauseHelpe
 		}
 		
 		verbElement.setFeature(Feature.PERSON, person);
-		setNeOnlyNegation(verbElement, noOnlyNegation);
-	}
-	
-	/**
-	 * Check complements and sets FrenchLexicalFeature.NE_ONLY_NEGATION
-	 * accordingly for the verb phrase.
-	 * 
-	 * @param phrase	the verb phrase
-	 */
-	protected void setNeOnlyNegation(NLGElement verbElement, boolean noOnlyNegation) {
-		// check complements if subject doesn't already have the feature
-		if (!noOnlyNegation) {
-			
-			List<NLGElement> complements =
-				verbElement.getFeatureAsElementList(InternalFeature.COMPLEMENTS);
-			
-			for (NLGElement current : complements) {
-				if ( current.checkIfNeOnlyNegation() ) {
-					noOnlyNegation = true;
-					break;
-				}
-			}
-		}
-		
-		verbElement.setFeature(FrenchLexicalFeature.NE_ONLY_NEGATION, noOnlyNegation);
 	}
 
 	/**
