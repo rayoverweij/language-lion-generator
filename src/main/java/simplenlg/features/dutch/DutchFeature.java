@@ -41,7 +41,7 @@ public abstract class DutchFeature {
 	 * <tr>
 	 * <td><b>Expected type</b></td>
 	 * <td>A <code>WordElement</code> or <code>String</code>.
-	 * <code>WordElement</code> is prefered.</td>
+	 * <code>WordElement</code> is preferred.</td>
 	 * </tr>
 	 * <tr>
 	 * <td><b>Created by</b></td>

@@ -1,30 +1,18 @@
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ErrorCollector;
 import simplenlg.framework.NLGFactory;
 import simplenlg.lexicon.Lexicon;
 import simplenlg.phrasespec.SPhraseSpec;
 import simplenlg.realiser.Realiser;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-
 public class BasicTest {
-
-    final private static Lexicon lexicon = new simplenlg.lexicon.english.XMLLexicon();
-    final private static NLGFactory factory = new NLGFactory(lexicon);
-    final private static simplenlg.realiser.Realiser realiser = new Realiser();
-
-    @Rule
-    public ErrorCollector collector = new ErrorCollector();
-
-    @Test
-    public void basicVerbInflection() {
+    public static void main(String[] args) {
+        Lexicon lexicon = new simplenlg.lexicon.dutch.XMLLexicon("src/main/java/simplenlg/lexicon/dutch/dutch-lexicon-3k.xml");
+        NLGFactory factory = new NLGFactory(lexicon);
+        Realiser realiser = new Realiser();
         SPhraseSpec clause = factory.createClause();
 
-        clause.setSubject("Julia");
-        clause.setVerb("want");
-        clause.addComplement("to dance");
+        clause.setSubject("Rayo");
+        clause.setVerb("zijn");
 
-        collector.checkThat(realiser.realiseSentence(clause), equalTo("Julia wants to dance."));
+        System.out.println(realiser.realiseSentence(clause));
     }
 }

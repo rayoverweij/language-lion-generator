@@ -63,8 +63,7 @@ public class XMLLexicon extends Lexicon {
 	private static final String XML_WORD = "word"; // node defining a word
 
 	// inflectional codes which need to be set as part of INFLECTION feature
-	private static final List<String> INFL_CODES = Arrays.asList(new String[] {
-			"reg", "irreg", "uncount", "inv", "metareg", "glreg", "nonCount", "sing", "groupuncount" });
+	private static final List<String> INFL_CODES = Arrays.asList("reg", "irreg", "uncount", "inv", "metareg", "glreg", "nonCount", "sing", "groupuncount");
 
 	// lexicon
 	private Set<WordElement> words; // set of words
@@ -80,7 +79,7 @@ public class XMLLexicon extends Lexicon {
 	// added by vaudrypl
 	protected Map<LexicalCategory, List<WordElement>> indexByCategory; // map from variants
 
-	
+
 	/**********************************************************************/
 	// constructors
 	/**********************************************************************/
@@ -135,7 +134,7 @@ public class XMLLexicon extends Lexicon {
 			xmlLexiconFilePath = "default-french-lexicon.xml";
 			break;
 		case DUTCH :
-			xmlLexiconFilePath = "default-dutch-lexicon.xml";
+			xmlLexiconFilePath = "./dutch-lexicon-3k.xml";
 			break;
 		default :
 			xmlLexiconFilePath = "default-lexicon.xml";
@@ -170,8 +169,6 @@ public class XMLLexicon extends Lexicon {
 	 * Load an XML Lexicon from a named file
 	 * with the ISO 639-1 two letter code of the associated language 
 	 * 
-	 * @param language
-	 *            the associated language ISO 639-1 two letter code
 	 * @param filename
 	 * @author vaudrypl
 	 */
@@ -199,8 +196,6 @@ public class XMLLexicon extends Lexicon {
 	 * Load an XML Lexicon from a file
 	 * with the ISO 639-1 two letter code of the associated language 
 	 * 
-	 * @param language
-	 *            the associated language ISO 639-1 two letter code
 	 * @param file
 	 * @author vaudrypl
 	 */
@@ -227,8 +222,6 @@ public class XMLLexicon extends Lexicon {
 	 * Load an XML Lexicon from a URI
 	 * with the ISO 639-1 two letter code of the associated language 
 	 * 
-	 * @param language
-	 *            the associated language ISO 639-1 two letter code
 	 * @param lexiconURI
 	 * @author vaudrypl
 	 */
@@ -243,13 +236,14 @@ public class XMLLexicon extends Lexicon {
 	 * vaudrypl removed call to addSpecialCases() and moved this
 	 * method to simplenlg.lexicon.english.XMLLexicon
 	 * 
-	 * @param uri
+	 * @param lexiconURI
 	 */
 	private void createLexicon(URI lexiconURI) {
 		// initialise objects
 		words = new HashSet<WordElement>();
 		indexByID = new HashMap<String, WordElement>();
 		indexByBase = new HashMap<String, List<WordElement>>();
+		System.out.println(indexByBase);
 		indexByVariant = new HashMap<String, List<WordElement>>();
 		// added by vaudrypl
 		indexByCategory = new EnumMap<LexicalCategory, List<WordElement>>(LexicalCategory.class);
@@ -326,9 +320,11 @@ public class XMLLexicon extends Lexicon {
 
 				if (feature.equalsIgnoreCase(XML_BASE)) {
 					word.setBaseForm(value);
-				} else if (feature.equalsIgnoreCase(XML_CATEGORY))
+				} else if (feature.equalsIgnoreCase(XML_CATEGORY)) {
+					assert value != null;
 					word.setCategory(LexicalCategory.valueOf(value
 							.toUpperCase()));
+				}
 				else if (feature.equalsIgnoreCase(XML_ID))
 					word.setId(value);
 				else if (value == null || value.equals("")) {
