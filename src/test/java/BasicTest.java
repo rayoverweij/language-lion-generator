@@ -6,6 +6,7 @@ import simplenlg.lexicon.Lexicon;
 import simplenlg.phrasespec.NPPhraseSpec;
 import simplenlg.phrasespec.SPhraseSpec;
 import simplenlg.realiser.Realiser;
+import simplenlg.semantics.Semanticon;
 
 public class BasicTest {
     public static void main(String[] args) {
@@ -49,5 +50,9 @@ public class BasicTest {
         String englishOutput = realiser.realiseSentence(englishClause);
         System.out.println(dutchOutput);
         System.out.println(englishOutput);
+
+        // Semanticons
+        Semanticon semanticon = new Semanticon("src/main/java/simplenlg/semantics/semanticon.xml");
+        System.out.println(semanticon.getSem("english").getCategories().toString());
     }
 }

@@ -243,7 +243,6 @@ public class XMLLexicon extends Lexicon {
 		words = new HashSet<WordElement>();
 		indexByID = new HashMap<String, WordElement>();
 		indexByBase = new HashMap<String, List<WordElement>>();
-		System.out.println(indexByBase);
 		indexByVariant = new HashMap<String, List<WordElement>>();
 		// added by vaudrypl
 		indexByCategory = new EnumMap<LexicalCategory, List<WordElement>>(LexicalCategory.class);
