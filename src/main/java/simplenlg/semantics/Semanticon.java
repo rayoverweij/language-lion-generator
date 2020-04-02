@@ -19,6 +19,7 @@ public class Semanticon {
     private Set<SemElement> sems;
     private Map<String, SemElement> indexById;
     private Map<String, SemElement> indexByName;
+    private Map<String, List<SemElement>> indexByCategory;
 
     // Constructors
     public Semanticon(String filename) {
@@ -30,8 +31,9 @@ public class Semanticon {
         createSemanticon(file.toURI());
     }
 
-    public Semanticon() throws FileNotFoundException {
-        throw new FileNotFoundException("Please provide a file!");
+    public Semanticon() {
+        File file = new File("src/main/java/simplenlg/semantics/semanticon.xml");
+        createSemanticon(file.toURI());
     }
 
     // Actually load the semanticon from the URI
@@ -39,6 +41,7 @@ public class Semanticon {
         sems = new HashSet<SemElement>();
         indexById = new HashMap<String, SemElement>();
         indexByName = new HashMap<String, SemElement>();
+        indexByCategory = new HashMap<String, List<SemElement>>();
 
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -135,6 +138,22 @@ public class Semanticon {
 
             indexByName.put(name, sem);
         }
+
+        // Finally index by category
+        if(sem.getCategories() != null) {
+            List<String> categories = sem.getCategories();
+            for (String category : categories) {
+                if(indexByCategory.containsKey(category)) {
+                    List<SemElement> semList = indexByCategory.get(category);
+                    semList.add(sem);
+                    indexByCategory.put(category, semList);
+                } else {
+                    List<SemElement> semList = new ArrayList<SemElement>();
+                    semList.add(sem);
+                    indexByCategory.put(category, semList);
+                }
+            }
+        }
     }
 
 
@@ -145,5 +164,9 @@ public class Semanticon {
 
     public SemElement getSem(String name) {
         return indexByName.get(name);
+    }
+
+    public List<SemElement> getSemsInCategory(String category) {
+        return indexByCategory.getOrDefault(category, null);
     }
 }

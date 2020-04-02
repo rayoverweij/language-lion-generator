@@ -275,9 +275,6 @@
 		<name>not</name>
 		<english>not,no</english>
 		<dutch>geen,niet</dutch>
-		<categories>
-			<pers_pron />
-		</categories>
 	</sem>
 	<sem>
 		<id>S0023000</id>

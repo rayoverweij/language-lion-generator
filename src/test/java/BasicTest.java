@@ -52,7 +52,8 @@ public class BasicTest {
         System.out.println(englishOutput);
 
         // Semanticons
-        Semanticon semanticon = new Semanticon("src/main/java/simplenlg/semantics/semanticon.xml");
+        Semanticon semanticon = new Semanticon();
         System.out.println(semanticon.getSem("english").getCategories().toString());
+        System.out.println(semanticon.getSemsInCategory("pers_pron").toString());
     }
 }
