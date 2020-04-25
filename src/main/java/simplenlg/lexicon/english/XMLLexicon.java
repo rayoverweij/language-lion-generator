@@ -19,16 +19,16 @@
 
 package simplenlg.lexicon.english;
 
-import java.io.File;
-import java.net.URI;
-import java.util.HashSet;
-import java.util.Set;
-
+import simplenlg.features.LexicalFeature;
 import simplenlg.framework.ElementCategory;
 import simplenlg.framework.Language;
 import simplenlg.framework.LexicalCategory;
 import simplenlg.framework.WordElement;
-import simplenlg.features.LexicalFeature;
+
+import java.io.File;
+import java.net.URI;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Extension of simplenlg.lexicon.XMLLexicon for English.
@@ -75,6 +75,7 @@ public class XMLLexicon extends simplenlg.lexicon.XMLLexicon {
 	}
 
 	public XMLLexicon() {
+		super(Language.ENGLISH);
 		addSpecialCases();
 	}
 

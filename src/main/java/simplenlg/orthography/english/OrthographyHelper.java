@@ -18,17 +18,13 @@
  */
 package simplenlg.orthography.english;
 
-import java.util.List;
-
 import simplenlg.features.DiscourseFunction;
 import simplenlg.features.InternalFeature;
-import simplenlg.framework.DocumentElement;
-import simplenlg.framework.ElementCategory;
-import simplenlg.framework.ListElement;
-import simplenlg.framework.NLGElement;
-import simplenlg.framework.StringElement;
-
+import simplenlg.features.dutch.DutchLexicalFeature;
+import simplenlg.framework.*;
 import simplenlg.orthography.OrthographyHelperInterface;
+
+import java.util.List;
 
 /**
  * <p>
@@ -188,21 +184,31 @@ public class OrthographyHelper implements OrthographyHelperInterface {
 
 		for (int i = 0; i < components.size(); i++) {
 			NLGElement thisElement = components.get(i);
-				realisedChild = thisElement.realiseOrthography();
-				
-				// Test on childRealisation added by vaudrypl to prevent
-				// unwanted spaces and separators when child is elided.
-				String childRealisation = realisedChild.getRealisation();
-				if (childRealisation != null && !childRealisation.isEmpty() ) {
-					
-					realisation.append(childRealisation);
-		
-					if (components.size() > 1 && i < components.size() - 1) {
-						realisation.append(listSeparator);
-					}
-		
-					realisation.append(' ');
+			realisedChild = thisElement.realiseOrthography();
+
+			// Test on childRealisation added by vaudrypl to prevent
+			// unwanted spaces and separators when child is elided.
+			String childRealisation = realisedChild.getRealisation();
+			if (childRealisation != null && !childRealisation.isEmpty() ) {
+
+				realisation.append(childRealisation);
+
+				boolean separatorAdded = false;
+				Object function = thisElement.getFeature(InternalFeature.DISCOURSE_FUNCTION);
+
+				if (components.size() > 1 && i < components.size() - 1) {
+					realisation.append(listSeparator);
+					separatorAdded = true;
 				}
+
+				if ( !separatorAdded && (DiscourseFunction.FRONT_MODIFIER.equals(function)
+						|| DiscourseFunction.CUE_PHRASE.equals(function))
+						&& !thisElement.getFeatureAsBoolean(DutchLexicalFeature.NO_COMMA)) {
+					realisation.append(",");
+				}
+
+				realisation.append(' ');
+			}
 		}
 		
 		if (realisation.length() > 0) {

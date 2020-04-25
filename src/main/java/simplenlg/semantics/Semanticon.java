@@ -9,7 +9,6 @@ import simplenlg.framework.SemElement;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.net.URI;
 import java.util.*;
 
@@ -27,14 +26,28 @@ public class Semanticon {
         createSemanticon(file.toURI());
     }
 
+    public Semanticon(URI uri) {
+        createSemanticon(uri);
+    }
+
     public Semanticon(File file) {
         createSemanticon(file.toURI());
     }
 
     public Semanticon() {
-        File file = new File("src/main/java/simplenlg/semantics/semanticon.xml");
-        createSemanticon(file.toURI());
+        File file = new File("semanticon.xml");
+        System.out.println(file.toURI());
+
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(file.toURI().toString());
+            System.out.println(doc.getDocumentElement());
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
     }
+
 
     // Actually load the semanticon from the URI
     private void createSemanticon(URI semanticonURI) {

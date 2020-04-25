@@ -18,34 +18,22 @@
  */
 package simplenlg.lexicon;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
 import simplenlg.features.LexicalFeature;
 import simplenlg.framework.Language;
 import simplenlg.framework.LexicalCategory;
 import simplenlg.framework.WordElement;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.*;
 
 /**
  * This class loads words from an XML lexicon. All features specified in the
@@ -127,19 +115,19 @@ public class XMLLexicon extends Lexicon {
 	public XMLLexicon(Language language) {
 		super(language);
 		if (language == null) language = Language.DEFAULT_LANGUAGE;
-		
+
 		String xmlLexiconFilePath;
 		switch (language) {
-		case FRENCH :
-			xmlLexiconFilePath = "default-french-lexicon.xml";
-			break;
-		case DUTCH :
-			xmlLexiconFilePath = "./dutch-lexicon-3k.xml";
-			break;
-		default :
-			xmlLexiconFilePath = "default-lexicon.xml";
+			case FRENCH :
+				xmlLexiconFilePath = "default-french-lexicon.xml";
+				break;
+			case DUTCH :
+				xmlLexiconFilePath = "default-dutch-lexicon.xml";
+				break;
+			default :
+				xmlLexiconFilePath = "default-lexicon.xml";
 		}
-		
+
 		try {
 			URL resource = getClass().getClassLoader().getResource(xmlLexiconFilePath);
 
